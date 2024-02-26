@@ -1,14 +1,24 @@
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import { View, StyleSheet, SafeAreaView } from 'react-native';
-import { Text, Surface, Button, Divider } from 'react-native-paper';
+import { Text, Surface, Button, Divider, IconButton } from 'react-native-paper';
 import { useOrientation } from '../hooks/phoneOrientation';
 import Header from '../components/Header';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 export default function DisplayScreen({navigation}) {
+  const orientation = useOrientation()
   const handleQuit = () => navigation.navigate("Post-Workout")
   const insets = useSafeAreaInsets();
+
+  if (orientation == "PORTRAIT") {
+    return (
+      <View style={styles.container}>
+        <Text style={styles.text}>Please Turn Phone To Landscape Mode</Text>
+        <IconButton icon="rowing" size={70} color='blue'/>
+      </View>
+    );
+  }
 
   return (
     <>

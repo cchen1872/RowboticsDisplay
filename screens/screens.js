@@ -6,18 +6,34 @@ import ChangeUnitsScreen from './ChangeUnitsScreen';
 export const screens = [ 
     {
         name: "Home",
-        component: HomeScreen
+        component: HomeScreen,
+        options: {
+            headerShown: false,
+            orientation: 'portrait'
+        }
     },
     {
         name: "Display", 
-        component: DisplayScreen
+        component: DisplayScreen,
+        options: {
+            headerShown: false,
+            orientation: 'landscape'
+        }
     },
     {
         name: "Post-Workout", 
-        component: PostWorkoutScreen
+        component: PostWorkoutScreen,
+        options: {
+            headerShown: false,
+            orientation: 'portrait'
+        }
     },
     {
         name: "Change-Units", 
-        component: ChangeUnitsScreen
+        component: ChangeUnitsScreen,
+        options: {
+            headerShown: false,
+            orientation: 'portrait'
+        }
     }
 ]

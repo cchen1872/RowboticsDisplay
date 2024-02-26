@@ -2,11 +2,12 @@ import {useEffect, useState} from 'react';
 import {BottomNavigation, Text, MD3Colors, Icon} from 'react-native-paper'
 import QRCodeScannerTab from '../screens/QRScannerTab';
 import ProfileTab from '../screens/ProfileTab';
+import HomeTab from '../screens/HomeTab';
 
 export default function BottomBar({navigation}) {
   const [index, setIndex] = useState(0);
 
-  const HomeRoute = () => <Text>Home</Text>;
+  const HomeRoute = () => <HomeTab navigation={navigation} />;
 
   const ScanRoute = () => <QRCodeScannerTab navigation={navigation}/>;
 

@@ -16,18 +16,18 @@ const Stack = createNativeStackNavigator()
 
 export default function App() {
   const orientation = useOrientation()
-  if (orientation == "LANDSCAPE") {
-    return (
-      <View style={styles.container}>
-        <Text style={styles.text}>Please Turn Phone To Portrait Mode</Text>
-        <IconButton icon="rowing" size={70} color='blue'/>
-      </View>
-    );
-  }
-
   const themeType = useSelector((state) => state.utils.themeType)
   const { LightTheme } = adaptNavigationTheme({ reactNavigationLight : DefaultTheme });
   const { DarkTheme } = adaptNavigationTheme({ reactNavigationDark : DefaultTheme});
+  // if (orientation == "LANDSCAPE") {
+  //   return (
+  //     <View style={styles.container}>
+  //       <Text style={styles.text}>Please Turn Phone To Portrait Mode</Text>
+  //       <IconButton icon="rowing" size={70} color='blue'/>
+  //     </View>
+  //   );
+  // }
+
 
   return (
     <PaperProvider theme={themeType === 'light' ? MD3LightTheme : MD3DarkTheme}>
@@ -44,6 +44,7 @@ export default function App() {
                   key={screen.name}
                   name={screen.name}
                   component={screen.component}
+                  options={screen.options}
                 />
               )}
             </Stack.Navigator>
