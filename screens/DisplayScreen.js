@@ -25,15 +25,17 @@ export default function DisplayScreen({navigation}) {
         <View style={{ paddingTop: insets.top }}/>
         <View style={styles.container}>
             <View style={[styles.row, styles.flex1, styles.border]}>
+                <View style={[styles.flex1]} />
                 <View style={[styles.flex2, styles.data1, styles.borderRight]}>
                     <Text style={styles.textSize}>TIME</Text>
                 </View>
-                <View style={[styles.flex1]}>
-                    <Text style={styles.textSize}>str/t</Text>
-                </View>
+                <View style={[styles.flex1]} />
             </View>
-            <View style={[styles.flex2, styles.data2]}>
-                <Text style={styles.textSize}>CURRENT SPLIT PACE</Text>
+            {/* <View style={[styles.row, styles.flex5, styles.border]}>
+            </View> */}
+            
+            <View style={[styles.flex1, styles.data2]}>
+                <Text style={styles.textSize}>PACE</Text>
             </View>
             <View style={[styles.row, styles.flex1, styles.border]}>
                 <View style={[styles.flex2, styles.data1, styles.borderRight]}>
@@ -41,22 +43,7 @@ export default function DisplayScreen({navigation}) {
                 </View>
                 <View style={styles.flex1} />
             </View>
-            <View style={[styles.row, styles.flex1, styles.border]}>
-                <View style={[styles.flex1]}>
-                    <Text style={styles.textSize}>AVG SPLIT PACE</Text>
-                </View>
-            </View>
-            <View style={[styles.row, styles.flex1]}>
-                <View style={[styles.flex1]}>
-                    <Text style={styles.textSize}>SPLIT METERS</Text>
-                </View>
-            </View>
-            <View style={[styles.row, styles.flex1, styles.border]}>
-                <View style={[styles.flex1]}>
-                    <Text style={styles.textSize}>PROJECTED METERS</Text>
-                </View>
-            </View>
-            <View style={[styles.row, styles.flex2, styles.border]}>
+            <View style={[styles.row, styles.flex3, styles.border]}>
                 <View style={[styles.flex1, styles.data1, styles.borderRight]}>
                     <Text style={styles.textSize}>TWIST ICON</Text>
                 </View>
@@ -96,6 +83,9 @@ const styles = StyleSheet.create({
   },
   flex2: {
     flex: 2
+  },
+  flex3: {
+    flex: 3
   },
   data1: {
     backgroundColor: 'orange'

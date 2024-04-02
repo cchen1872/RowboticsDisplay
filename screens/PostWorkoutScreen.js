@@ -12,7 +12,7 @@ export default function PostWorkoutScreen({navigation}) {
 
   const handleReturnHome = () => {
     dispatch({type: "SET_SERVER", payload: ""})
-    return navigation.navigate("Home")
+    return navigation.push("Home")
   }
   
 

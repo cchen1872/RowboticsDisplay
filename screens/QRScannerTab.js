@@ -5,21 +5,44 @@ import { BarCodeScanner } from 'expo-barcode-scanner';
 import { Camera } from 'expo-camera';
 import {Chip} from 'react-native-paper'
 import {useOrientation} from '../hooks/phoneOrientation'
+import EventSource from 'raect-native-sse'
 
 export default function QRCodeScannerTab({navigation}) {
   const [hasPermission, setHasPermission] = useState(null);
-
+  const orientation = useOrientation();
+  useEffect(() => {
+    if (orientation === "LANDSCAPE") {
+      console.log("LANDSCAPE")
+    }
+  }, [orientation])
+  
   useEffect(() => {
     (async () => {
       const { status } = await BarCodeScanner.requestPermissionsAsync();
       setHasPermission(status === 'granted');
     })();
   }, []);
-
+  const pingHandler = useCallback(
+      (event) => {
+          // In Event Source Listeners in connection with redux
+          // you should read state directly from store object.
+          console.log(event);
+      },
+      []
+  );
+  
   const serverId = useSelector((state) => state.server.serverId)
   const dispatch = useDispatch()
+  useEffect(() => {
+    console.log(serverId)
+  }, [serverId]);
 
   const handleBarCodeScanned = ({ type, data }) => {
+    let es = EventSource(`${process.env.EXPO_PUBLIC_FLASK_URL}/listen`) // REPLACE WITH DATA LATER ONCE QR CODED
+    es.addEventListener("open", pingHandler);
+    es.addEventListener("ping", pingHandler);
+    es.addEventListener("close", pingHandler);
+
     dispatch({type: "SET_SERVER", payload: data});
     
     navigation.navigate('Display')
@@ -30,7 +53,7 @@ export default function QRCodeScannerTab({navigation}) {
     return (
       <View style={styles.cameraContainer}>
           <BarCodeScanner
-            onBarCodeScanned={serverId === "" ? handleBarCodeScanned : undefined}
+            onBarCodeScanned={serverId === "" ? handleBarCodeScanned : console.log("SJDFKLFJK")}
             style={styles.camera}
           >
               <Chip style={styles.infoChip}>
@@ -38,6 +61,7 @@ export default function QRCodeScannerTab({navigation}) {
               </Chip>
           </BarCodeScanner>
       </View> 
+      
 
     );
   };
