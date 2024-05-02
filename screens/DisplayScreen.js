@@ -32,8 +32,8 @@ export default function DisplayScreen({navigation}) {
         var b = event.data.replace(/'/g, '"');
         let data = JSON.parse(b)
         console.log("DATA");
-        console.log(b);
-        setrowingInfo(b);
+        console.log(JSON.stringify(data));
+        setrowingInfo(data);
     },
     [rowingInfo]
   );
