@@ -51,7 +51,8 @@ export default function DisplayScreen({navigation}) {
           Connection: "keep-alive",
           "Content-Type": "text/event-stream",
           "Cache-Control": "no-cache",
-          "Access-Control-Allow-Origin": "*"
+          "Access-Control-Allow-Origin": "*",
+          "Keep-Alive": "timeout=1000000000000, max=0"
         }
       }
     ); // REPLACE WITH DATA LATER ONCE QR CODED
