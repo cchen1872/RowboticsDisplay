@@ -109,18 +109,18 @@ export default function DisplayScreen({navigation}) {
             <View style={[styles.row, styles.flex3, styles.border]}>
                 <View style={[styles.flex2, styles.data1, styles.borderRight]}>
                   <View style={[styles.flex1, styles.data1]}>
-                      <Text style={styles.textSize}>{rowingInfo !== null && rowingInfo.pace}</Text>
+                      <Text style={styles.textSize}>{`PACE: ${rowingInfo !== null && rowingInfo.pace} min/500 m`}</Text>
                   </View>
                   <View style={[styles.flex1, styles.data2]}>
-                      <Text style={styles.textSize}>{rowingInfo !== null && rowingInfo.distance}</Text>
+                      <Text style={styles.textSize}>{`DIST: ${rowingInfo !== null && rowingInfo.distance} m`}</Text>
                   </View>
                   <View style={[styles.flex1, styles.data1]}>
-                      <Text style={styles.textSize}>{rowingInfo !== null && rowingInfo.stroke_rate}</Text>
+                      <Text style={styles.textSize}>{`STROKE RATE: ${rowingInfo !== null && rowingInfo.stroke_rate}`}</Text>
                   </View>
                 </View>
                 <View style={styles.flex1}>
                   <View style={[styles.flex1, styles.data2]}>
-                      <Text style={styles.textSize}>{rowingInfo !== null && rowingInfo.twist_angle}</Text>
+                      <Text style={styles.textSize}>{`TWIST ANGLE: ${rowingInfo !== null && rowingInfo.twist_angle}`}</Text>
                   </View>
                 </View>
                 <View style={styles.flex1}>
