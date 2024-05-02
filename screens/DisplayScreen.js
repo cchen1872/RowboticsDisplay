@@ -89,7 +89,7 @@ export default function DisplayScreen({navigation}) {
             <View style={[styles.row, styles.flex2, styles.border]}>
                 <View style={[styles.flex1]} />
                 <View style={[styles.flex2, styles.data1]}>
-                    <Text style={styles.textSize}>{`TIME: ${rowingInfo !== null & rowingInfo.time_diff_min}:${rowingInfo !== null & rowingInfo.time_diff_sec}`}</Text>
+                    <Text style={styles.textSize}>{`TIME: ${rowingInfo !== null && rowingInfo.time_diff_min}:${rowingInfo !== null && rowingInfo.time_diff_sec}`}</Text>
                 </View>
                 <View style={[styles.flex1]} />
             </View>
@@ -105,23 +105,23 @@ export default function DisplayScreen({navigation}) {
             <View style={[styles.row, styles.flex3, styles.border]}>
                 <View style={[styles.flex2, styles.data1, styles.borderRight]}>
                   <View style={[styles.flex1, styles.data1]}>
-                      <Text style={styles.textSize}>{rowingInfo !== null & rowingInfo.pace}</Text>
+                      <Text style={styles.textSize}>{rowingInfo !== null && rowingInfo.pace}</Text>
                   </View>
                   <View style={[styles.flex1, styles.data2]}>
-                      <Text style={styles.textSize}>{rowingInfo !== null & rowingInfo.distance}</Text>
+                      <Text style={styles.textSize}>{rowingInfo !== null && rowingInfo.distance}</Text>
                   </View>
                   <View style={[styles.flex1, styles.data1]}>
-                      <Text style={styles.textSize}>{rowingInfo !== null & rowingInfo.stroke_rate}</Text>
+                      <Text style={styles.textSize}>{rowingInfo !== null && rowingInfo.stroke_rate}</Text>
                   </View>
                 </View>
                 <View style={styles.flex1}>
                   <View style={[styles.flex1, styles.data2]}>
-                      <Text style={styles.textSize}>{rowingInfo !== null & rowingInfo.twist_angle}</Text>
+                      <Text style={styles.textSize}>{rowingInfo !== null && rowingInfo.twist_angle}</Text>
                   </View>
                 </View>
                 <View style={styles.flex1}>
                   <View style={[styles.flex1, styles.data1]}>
-                      <Text style={styles.textSize}>{rowingInfo != null & (rowingInfo.in_water)}</Text>
+                      <Text style={styles.textSize}>{rowingInfo != null && (rowingInfo.in_water)}</Text>
                   </View>
                 </View>
             </View>
