@@ -5,7 +5,7 @@ import { Text, Surface, Button, Divider, IconButton } from 'react-native-paper';
 import { useOrientation } from '../hooks/phoneOrientation';
 import Header from '../components/Header';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import EventSource from 'react-native-sse'
+import RNEventSource from "react-native-event-source";
 import axios from 'axios'
 
 export default function DisplayScreen({navigation}) {
@@ -23,18 +23,21 @@ export default function DisplayScreen({navigation}) {
     setES(null);
     navigation.navigate("Post-Workout")
   }
-  // useEffect(()=> {
-  //   setInterval(()=> {
-  //     let diff = Math.floor(Date.now()/1000 - count);
-  //     setTimediff(diff);
-  //   }, 500)
-  // }, [])
+  useEffect(()=> {
+    setInterval(()=> {
+      console.log(Date.now()/1000)
+      console.log(count)
+      let diff = Math.floor(Date.now()/1000 - count);
+      setTimediff(diff);
+    }, 500)
+  }, [])
   
   const pingHandler = useCallback(
     (event) => {
         // In Event Source Listeners in connection with redux
         // you should read state directly from store object.
         console.log(`EVENT: ${JSON.stringify(event)}`);
+        console.log(parseFloat(event.data))
         setCount(parseFloat(event.data));
         console.log(`NEW COUNT: ${count}`)
         console.log(`NEW COUNT: ${parseFloat(event.data) - count}`)
@@ -51,20 +54,21 @@ export default function DisplayScreen({navigation}) {
   );
 
   useEffect(() => {
-    const e = new EventSource(`${process.env.EXPO_PUBLIC_FLASK_URL}/listen`, 
+    const e = new RNEventSource(
+      `${process.env.EXPO_PUBLIC_FLASK_URL}/listen`,
       {
-        debug: true, 
         headers: {
-          "X-Accel-Buffering": "no"
-        },
-        pollingInterval: 0,
-        lineEndingCharacter: '\n\n'
+          Connection: "keep-alive",
+          "Content-Type": "text/event-stream",
+          "Cache-Control": "no-cache",
+          "Access-Control-Allow-Origin": "*"
+        }
       }
-    ) // REPLACE WITH DATA LATER ONCE QR CODED
+    ); // REPLACE WITH DATA LATER ONCE QR CODED
     e.addEventListener("open", (event) => {
       // In Event Source Listeners in connection with redux
       // you should read state directly from store object.
-      console.log(`EVENT: ${JSON.stringify(event)}`);
+      console.log(`EVENT THIS: ${JSON.stringify(event)}`);
   });
     e.addEventListener("message", pingHandler);
     e.addEventListener("close", openHandler);
