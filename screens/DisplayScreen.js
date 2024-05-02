@@ -89,7 +89,7 @@ export default function DisplayScreen({navigation}) {
             <View style={[styles.row, styles.flex2, styles.border]}>
                 <View style={[styles.flex1]} />
                 <View style={[styles.flex2, styles.data1]}>
-                    <Text style={styles.textSize}>{`TIME: ${count !== null && count}`}</Text>
+                    <Text style={styles.textSize}>{`TIME: ${rowingInfo !== null & rowingInfo.time_diff_min}:${rowingInfo !== null & rowingInfo.time_diff_sec}`}</Text>
                 </View>
                 <View style={[styles.flex1]} />
             </View>
