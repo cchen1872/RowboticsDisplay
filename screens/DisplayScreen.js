@@ -10,25 +10,72 @@ import axios from 'axios'
 
 export default function DisplayScreen({navigation}) {
   const orientation = useOrientation()
-  const handleQuit = () => navigation.navigate("Post-Workout")
   const insets = useSafeAreaInsets();
   const [es, setES] = useState(null);
-
+  const [count, setCount] = useState(null);
+  const [timediff, setTimediff] = useState(null);
+  const handleQuit = () => {
+    axios.patch(`${process.env.EXPO_PUBLIC_FLASK_URL}/close`)
+      .then(data => console.log(data))
+      .catch(err => console.error(err));
+    // es.close();
+    
+    setES(null);
+    navigation.navigate("Post-Workout")
+  }
+  // useEffect(()=> {
+  //   setInterval(()=> {
+  //     let diff = Math.floor(Date.now()/1000 - count);
+  //     setTimediff(diff);
+  //   }, 500)
+  // }, [])
+  
   const pingHandler = useCallback(
     (event) => {
         // In Event Source Listeners in connection with redux
         // you should read state directly from store object.
-        console.log(`EVENT: ${event}`);
+        console.log(`EVENT: ${JSON.stringify(event)}`);
+        setCount(parseFloat(event.data));
+        console.log(`NEW COUNT: ${count}`)
+        console.log(`NEW COUNT: ${parseFloat(event.data) - count}`)
+    },
+    [count]
+  );
+  const openHandler = useCallback(
+    (event) => {
+        // In Event Source Listeners in connection with redux
+        // you should read state directly from store object.
+        console.log(`EVENT: ${JSON.stringify(event)}`);
     },
     []
-);
+  );
 
   useEffect(() => {
-    const e = new EventSource(`${process.env.EXPO_PUBLIC_FLASK_URL}/listen`) // REPLACE WITH DATA LATER ONCE QR CODED
-    e.addEventListener("open", pingHandler);
+    const e = new EventSource(`${process.env.EXPO_PUBLIC_FLASK_URL}/listen`, 
+      {
+        debug: true, 
+        headers: {
+          "X-Accel-Buffering": "no"
+        },
+        pollingInterval: 0,
+        lineEndingCharacter: '\n\n'
+      }
+    ) // REPLACE WITH DATA LATER ONCE QR CODED
+    e.addEventListener("open", (event) => {
+      // In Event Source Listeners in connection with redux
+      // you should read state directly from store object.
+      console.log(`EVENT: ${JSON.stringify(event)}`);
+  });
     e.addEventListener("message", pingHandler);
-    e.addEventListener("close", pingHandler);
-    e.open()
+    e.addEventListener("close", openHandler);
+    // e.open()
+    console.log("EVENTSOURCE OPENED")
+    // axios.patch(`${process.env.EXPO_PUBLIC_FLASK_URL}/open`)
+    // .then(data => console.log(data))
+    // .catch(err => console.error(err));
+    console.log("EVENTSOURCE OPENED OVER API")
+    console.log("DSJKLFSFL")
+    console.log(e)
 
     setES(e)
   }, [])
@@ -48,7 +95,7 @@ export default function DisplayScreen({navigation}) {
             <View style={[styles.row, styles.flex2, styles.border]}>
                 <View style={[styles.flex1]} />
                 <View style={[styles.flex2, styles.data1]}>
-                    <Text style={styles.textSize}>TIME</Text>
+                    <Text style={styles.textSize}>{`TIME: ${count !== null && count}`}</Text>
                 </View>
                 <View style={[styles.flex1]} />
             </View>

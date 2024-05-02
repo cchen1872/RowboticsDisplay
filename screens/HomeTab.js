@@ -1,7 +1,7 @@
 import { StatusBar } from 'expo-status-bar';
 import { SafeAreaView, ScrollView, StyleSheet, Text, View } from 'react-native';
 import React, { Component } from 'react';
-import { Appbar, BottomNavigation, FAB, useTheme, Searchbar, Button } from 'react-native-paper';
+import { Appbar, BottomNavigation, FAB, useTheme, Searchbar, Button, IconButton } from 'react-native-paper';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
 
 const BOTTOM_APPBAR_HEIGHT = 80;
@@ -18,18 +18,10 @@ const App = () => {
 
     <SafeAreaProvider>
     <SafeAreaView>
-      <Text style={styles.head} variant="displayMedium">What would you like to cook today?</Text>
-      <Searchbar style={styles.search} lightTheme placeholder="Search" onChangeText={onChangeSearch} value={searchQuery} elevation="2"/>
-      <Button style={styles.button} mode="contained-tonal" textColor="#faf0e6" buttonColor="#ffb347" onPress={() => {}}>Explore your pantry</Button>
-      <Button style={styles.button} mode="contained-tonal" textColor="#faf0e6" buttonColor="#ffb347" onPress={() => {}}>Check your shopping cart</Button>
-        {/* <Appbar style={styles.item} >  
-        <Appbar.Action size= {30} color= 'orange' icon="home" onPress={() => {}} />
-        <Appbar.Action size= {30} color= 'orange' icon="scan-helper" onPress={() => {}} /> 
-        <Appbar.Action size= {30} color= 'orange' icon="fridge-bottom" onPress={() => {}} />
-        <Appbar.Action size= {30} color= 'orange' icon="cart-heart" onPress={() => {}} />
-        <Appbar.Action size= {30} color= 'orange' icon="account" onPress={() => {}} /> 
-        </Appbar>  */}
-
+      <View styles={styles.container}>
+        <Text style={styles.head} variant="displayMedium">Row Row Row Our Boat</Text>
+        <IconButton icon="rowing" size={70} color='blue' styles={{align: 'center'}}/>
+      </View>
     </SafeAreaView>
     </SafeAreaProvider>
 
@@ -48,6 +40,13 @@ const styles = StyleSheet.create({
     fontSize: 35,
     fontWeight: '500',
     margin: 50,
+  },
+  container: {
+    flex: 1,
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'center',
+    flexDirection: 'column'
   },
 
   item: {

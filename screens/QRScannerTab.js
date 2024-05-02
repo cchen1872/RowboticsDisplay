@@ -38,7 +38,7 @@ export default function QRCodeScannerTab({navigation}) {
     dispatch({type: "SET_SERVER", payload: data});
 
     
-    navigation.navigate('Display')
+    navigation.push('Display')
     // alert(`Bar code with type ${type} and data ${data} has been scanned!`);
   };
 
