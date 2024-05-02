@@ -23,24 +23,14 @@ export default function DisplayScreen({navigation}) {
     setES(null);
     navigation.navigate("Post-Workout")
   }
-  useEffect(()=> {
-    setInterval(()=> {
-      console.log(Date.now()/1000)
-      console.log(count)
-      let diff = Math.floor(Date.now()/1000 - count);
-      setTimediff(diff);
-    }, 500)
-  }, [])
   
   const pingHandler = useCallback(
     (event) => {
         // In Event Source Listeners in connection with redux
         // you should read state directly from store object.
         console.log(`EVENT: ${JSON.stringify(event)}`);
-        console.log(parseFloat(event.data))
-        setCount(parseFloat(event.data));
-        console.log(`NEW COUNT: ${count}`)
-        console.log(`NEW COUNT: ${parseFloat(event.data) - count}`)
+        console.log(parseFloat(event.data.time_diff_sec))
+        setCount(parseFloat(event.data.time_diff_sec));
     },
     [count]
   );
