@@ -29,7 +29,8 @@ export default function DisplayScreen({navigation}) {
         // In Event Source Listeners in connection with redux
         // you should read state directly from store object.
         console.log(`EVENT: ${JSON.stringify(event)}`);
-        setrowingInfo(event.data);
+        let data = JSON.parse(event.data)
+        setrowingInfo(data);
     },
     [rowingInfo]
   );
