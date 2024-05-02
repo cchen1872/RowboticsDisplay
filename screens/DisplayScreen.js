@@ -30,6 +30,8 @@ export default function DisplayScreen({navigation}) {
         // you should read state directly from store object.
         console.log(`EVENT: ${JSON.stringify(event)}`);
         let data = JSON.parse(event.data)
+        console.log("DATA");
+        console.log(data);
         setrowingInfo(data);
     },
     [rowingInfo]
