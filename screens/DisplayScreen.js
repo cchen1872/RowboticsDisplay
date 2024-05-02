@@ -12,7 +12,7 @@ export default function DisplayScreen({navigation}) {
   const orientation = useOrientation()
   const insets = useSafeAreaInsets();
   const [es, setES] = useState(null);
-  const [count, setCount] = useState(null);
+  const [rowingInfo, setrowingInfo] = useState(null);
   const [timediff, setTimediff] = useState(null);
   const handleQuit = () => {
     axios.patch(`${process.env.EXPO_PUBLIC_FLASK_URL}/close`)
@@ -29,10 +29,9 @@ export default function DisplayScreen({navigation}) {
         // In Event Source Listeners in connection with redux
         // you should read state directly from store object.
         console.log(`EVENT: ${JSON.stringify(event)}`);
-        console.log(parseFloat(event.data.time_diff_sec))
-        setCount(parseFloat(event.data.time_diff_sec));
+        setrowingInfo(event.data);
     },
-    [count]
+    [rowingInfo]
   );
   const openHandler = useCallback(
     (event) => {
@@ -106,23 +105,23 @@ export default function DisplayScreen({navigation}) {
             <View style={[styles.row, styles.flex3, styles.border]}>
                 <View style={[styles.flex2, styles.data1, styles.borderRight]}>
                   <View style={[styles.flex1, styles.data1]}>
-                      <Text style={styles.textSize}>PACE</Text>
+                      <Text style={styles.textSize}>{rowingInfo !== null & rowingInfo.pace}</Text>
                   </View>
                   <View style={[styles.flex1, styles.data2]}>
-                      <Text style={styles.textSize}>DISTANCE</Text>
+                      <Text style={styles.textSize}>{rowingInfo !== null & rowingInfo.distance}</Text>
                   </View>
                   <View style={[styles.flex1, styles.data1]}>
-                      <Text style={styles.textSize}>STROKE RATE</Text>
+                      <Text style={styles.textSize}>{rowingInfo !== null & rowingInfo.stroke_rate}</Text>
                   </View>
                 </View>
                 <View style={styles.flex1}>
                   <View style={[styles.flex1, styles.data2]}>
-                      <Text style={styles.textSize}>TWIST ICON</Text>
+                      <Text style={styles.textSize}>{rowingInfo !== null & rowingInfo.twist_angle}</Text>
                   </View>
                 </View>
                 <View style={styles.flex1}>
                   <View style={[styles.flex1, styles.data1]}>
-                      <Text style={styles.textSize}>TILT ICON</Text>
+                      <Text style={styles.textSize}>{rowingInfo != null & (rowingInfo.in_water)}</Text>
                   </View>
                 </View>
             </View>
